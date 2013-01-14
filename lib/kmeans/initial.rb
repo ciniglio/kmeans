@@ -5,6 +5,10 @@ module Kmeans
       @data = data
       @clusters = new_clusters(@k)
     end
+
+    def clusters
+      @clusters
+    end
   end
 
   module ForgyInitializer
