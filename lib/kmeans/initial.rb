@@ -1,7 +1,7 @@
 module Kmeans
   class Classifier
-    def initialize(k, data)
-      @k = k
+    def initialize(num_clusters, data)
+      @k = num_clusters
       @data = data
       @clusters = new_clusters(@k)
     end

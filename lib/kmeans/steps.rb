@@ -1,6 +1,7 @@
 module Kmeans
   class Classifier
     def assignment_step
+      # assign data to nearest centroid
       clusters = new_clusters(@k)
       @data.each do |d|
         min_dist = Float::INFINITY
@@ -19,6 +20,7 @@ module Kmeans
 
     def update_step
       means = Array.new(@k)
+      # Get centroid of each cluster
       @clusters.each_with_index do |c, i|
         means[i] = centroid(c)
       end
