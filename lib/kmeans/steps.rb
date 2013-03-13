@@ -29,7 +29,10 @@ module Kmeans
     end
 
     def run(n = 100)
-      n.times { update_step }
+      n.times do |i|
+        puts "Running step #{i}"
+        update_step
+      end
     end
   end
 end

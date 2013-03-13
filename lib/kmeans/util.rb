@@ -24,18 +24,13 @@ module Kmeans
   def self.distance(u, v)
     raise LengthMismatch, "||#{u}|| != ||#{v}||" unless (u.length == v.length)
     sum = 0.to_f
-    u.each_with_index do |p, i|
-      q = v[i]
-      sum += (p - q)**(2.to_f)
-    end
+    sum = u.zip(v).map{ |i| i.inject(:-)**2 }.sum
     Math.sqrt(sum)
   end
 
   def self.centroid(points)
-    x = Array.new(points.first.length, 0)
-    points.each do |p|
-      x = x.zip(p).map { |xi| xi.inject(:+) }
-    end
+    x = Array.new(points.first.length, 0.0)
+    x = x.zip(*points).map{|i| i.inject(:+)}
     x.map { |xi| xi / points.length.to_f }
   end
 end
