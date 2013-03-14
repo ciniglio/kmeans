@@ -1,4 +1,5 @@
 require 'set'
+require 'matrix'
 
 module Kmeans
   class Classifier
@@ -29,8 +30,8 @@ module Kmeans
   end
 
   def self.centroid(points)
-    x = Array.new(points.first.length, 0.0)
-    x = x.zip(*points).map{|i| i.inject(:+)}
-    x.map { |xi| xi / points.length.to_f }
+    return nil unless points.length > 0
+    z = Array.new(points.first.length, 0.0)
+    z.zip(*points).map{|i| i.inject(:+)/z.count}
   end
 end

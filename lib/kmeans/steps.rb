@@ -2,11 +2,13 @@ module Kmeans
   class Classifier
     def assignment_step
       # assign data to nearest centroid
+      @old_clusters = @clusters
       clusters = new_clusters(@k)
-      @data.each do |d|
+      @data.each_with_index do |d, j|
         min_dist = Float::INFINITY
         nearest = nil
         @means.each_with_index do |m, i|
+          next unless m
           dist = distance(d, m)
           if dist < min_dist
             min_dist = dist
@@ -28,11 +30,17 @@ module Kmeans
       assignment_step
     end
 
-    def run(n = 100)
+    def run(n = 40)
       n.times do |i|
-        puts "Running step #{i}"
+        break if done?
+        puts "Step #{i}"
         update_step
       end
+    end
+
+    private
+    def done?
+      @old_clusters == @clusters
     end
   end
 end
